@@ -1,6 +1,7 @@
 package com.spring_boot.jpa_crud_example.service;
 
 import com.spring_boot.jpa_crud_example.model.Person;
+import com.spring_boot.jpa_crud_example.model.PersonEmployeeDTO;
 import com.spring_boot.jpa_crud_example.repository.PersonRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,10 @@ public class PersonService {
 
     public List<Person> getAll() {
         return personRepository.getAllPersons();
+    }
+
+    public List<PersonEmployeeDTO> composePersonsAndEmployees() {
+        return personRepository.composePersonsAndEmployees();
     }
 
     public Person savePerson(Person person) {

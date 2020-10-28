@@ -1,6 +1,7 @@
 package com.spring_boot.jpa_crud_example.repository;
 
 import com.spring_boot.jpa_crud_example.model.Person;
+import com.spring_boot.jpa_crud_example.model.PersonEmployeeDTO;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,5 +50,11 @@ public class PersonRepository {
 
     public List<Person> findAllPersonsByName(String name) {
         return entityManager.createNativeQuery("call getPersonListByName (:name)").setParameter("name", name).getResultList();
+    }
+
+    public List<PersonEmployeeDTO> composePersonsAndEmployees() {
+        return entityManager
+                .createQuery("SELECT p.firstName, p.lastName, e.position FROM Person p, Employee e WHERE p.firstName = e.firstName AND p.lastName = e.lastName")
+                .getResultList();
     }
 }
